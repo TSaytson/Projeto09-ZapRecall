@@ -2,8 +2,13 @@ import { useState } from 'react'
 import styled from 'styled-components';
 import play from '../assets/images/seta_play.png'
 import turn from '../assets/images/seta_virar.png'
+import zap from '../assets/images/icone_certo.png'
+import almost from '../assets/images/icone_quase.png'
+import wrong from '../assets/images/icone_erro.png'
 
 export default function Zap({ item, index, disabled, setDisabled, zapInProgress, setZapInProgress }) {
+
+    const [icone, setIcone] = useState(play);
 
     const [showZap, setShowZap] = useState(false);
     const [rotate, setRotate] = useState(false);
@@ -15,6 +20,7 @@ export default function Zap({ item, index, disabled, setDisabled, zapInProgress,
                 setZapInProgress(true);
                 setShowZap(true);
                 setRotate(!rotate);
+                setIcone(turn);
             }
             else if (!showAnswer) {
                 setRotate(!rotate);
@@ -34,7 +40,7 @@ export default function Zap({ item, index, disabled, setDisabled, zapInProgress,
                             `${item.question}`}
                 </p>
                 <img onClick={() => changeZap()}
-                    src={showZap ? turn : play} />
+                    src={icone} />
             </List>
         </>
 

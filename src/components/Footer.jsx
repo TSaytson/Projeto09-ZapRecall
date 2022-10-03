@@ -11,7 +11,8 @@ function Button(props){
         height: '6vh',
         width: '22vw',
         marginRight: '8px',
-        border: '0.5px'
+        border: '0.5px',
+        cursor: 'pointer'
     }
 
     return(
@@ -19,7 +20,7 @@ function Button(props){
     )
 }
 
-export default function Footer(){
+export default function Footer({answers, length}){
     return (
         <>
             <ContainerFooter>
@@ -28,7 +29,7 @@ export default function Footer(){
                     <Button color={colors.amarelo}>Quase não lembrei</Button>
                     <Button color={colors.verde}>Zap!</Button>
                 </div>
-                <h1>0/4 Concluídos</h1>
+                <h1>{answers}/{length} Concluídos</h1>
 
             </ContainerFooter>
         </>

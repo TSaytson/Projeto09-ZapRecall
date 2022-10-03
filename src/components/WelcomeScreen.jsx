@@ -37,5 +37,6 @@ const Screen = styled.div`
         border-radius: 5px;
         width: 70vw;
         height: 10vh;
+        cursor: pointer;
     }
 `

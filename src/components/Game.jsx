@@ -1,21 +1,36 @@
 import { useState } from 'react'
-import styled from 'styled-components'
 import Logo from './Logo'
-import Questions from './Questions'
+import Zaps from './Zaps'
 import Footer from './Footer'
 import questionsAndAnswers from '../assets/mock'
 
 
 export default function Game({gameStart}) {
     const [answers, setAnswers] = useState(0);
+    const [disabled, setDisabled] = useState(true);
+    const [zapInProgress, setZapInProgress] = useState(false);
     const length = questionsAndAnswers.length;
+    console.log('answers:', answers);
+
     return (
         <>
             {gameStart &&
                 <>
                 <Logo />
-                <Questions />
-                <Footer answers={answers} length={length}/>
+                <Zaps 
+                disabled={disabled}
+                setDisabled={setDisabled}
+                zapInProgress={zapInProgress}
+                setZapInProgress={setZapInProgress}
+                />
+                <Footer 
+                answers={answers}
+                setAnswers={setAnswers}
+                length={length}
+                disabled={disabled}
+                setDisabled={setDisabled}
+                setZapInProgress={setZapInProgress}
+                />
                 </>
             }
         </>

@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import colors from "../assets/colors"
 
-function Button(props){
+function Button({color, disabled, children, verifyZap}){
     const buttonStyle = {
         borderRadius: '5px',
-        backgroundColor: props.color,
+        backgroundColor: color,
         fontFamily:'Recursive',
         fontSize: '12px',
         color:'#fff',
@@ -12,22 +12,38 @@ function Button(props){
         width: '22vw',
         marginRight: '8px',
         border: '0.5px',
-        cursor: 'pointer'
+        cursor: disabled ? 'not-allowed' : 'pointer'
     }
 
     return(
-        <button style={buttonStyle}>{props.children}</button>
+        <button onClick={verifyZap} style={buttonStyle}>{children}</button>
     )
 }
 
-export default function Footer({answers, length}){
+export default function Footer({answers, setAnswers, length, disabled, setDisabled, setZapInProgress}){
+
+    function verifyZap(){
+        console.log('disabled', disabled);
+        if (!disabled){
+            console.log('entrou no verifyZap');
+            setAnswers(answers+1);
+            setDisabled(true);
+            setZapInProgress(false);
+        }
+    }
     return (
         <>
             <ContainerFooter>
                 <div>
-                    <Button color={colors.vermelho}>Não lembrei</Button>
-                    <Button color={colors.amarelo}>Quase não lembrei</Button>
-                    <Button color={colors.verde}>Zap!</Button>
+                    <Button color={colors.vermelho} disabled={disabled} verifyZap={verifyZap}>
+                        Não lembrei
+                    </Button>
+                    <Button color={colors.amarelo} disabled={disabled} verifyZap={verifyZap}>
+                        Quase não lembrei
+                    </Button>
+                    <Button color={colors.verde} disabled={disabled} verifyZap={verifyZap}>
+                        Zap!
+                    </Button>
                 </div>
                 <h1>{answers}/{length} Concluídos</h1>
 
